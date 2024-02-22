@@ -2,22 +2,15 @@ package statePattern;
 
 public class SuspendState implements AccountState {
 
-	private Account account;
-	
-	public SuspendState(Account account)
-	{
-		this.account = account;
-	}
-	
 	@Override
-	public void deposit(Double depositAmount) {
+	public void deposit(Double depositAmount, Account account) {
 		account.setBalance(account.getBalance() + depositAmount);
-		System.out.println("Deposit Successfully!");
+		System.out.println("\nDeposit Successfully!");
 		account.toString();
 	}
 
 	@Override
-	public void withdraw(Double withdrawAmount) {
+	public void withdraw(Double withdrawAmount, Account account) {
 		account.setBalance(account.getBalance() - withdrawAmount);
 		System.out.println("Withdraw Successfully!");
 		account.toString();
@@ -31,14 +24,14 @@ public class SuspendState implements AccountState {
 
 	@Override
 	public void activateState(Account account) {
-		account.setAccountState(new SuspendState(account));
+		account.setAccountState(new SuspendState());
 		System.out.println("Account is activated!");
 		
 	}
 
 	@Override
 	public void closeState(Account account) {
-		account.setAccountState(new CloseState(account));
+		account.setAccountState(new CloseState());
 		System.out.println("Account is closed!");
 		
 	}
